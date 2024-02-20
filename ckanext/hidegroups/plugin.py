@@ -10,13 +10,14 @@ class HideGroupsPlugin(plugins.SingletonPlugin):
     def update_config(self, config):
         toolkit.add_template_directory(config, 'templates')
 
-    # IFacets
-
+    # IFacets Plugin
+    #delete group from facets_dict
     def _facets(self, facets_dict):
         if 'groups' in facets_dict:
             del facets_dict['groups']
         return facets_dict
 
+    #Send facets_dict from each call to delete group function in def _facets
     def dataset_facets(self, facets_dict, package_type):
         return self._facets(facets_dict)
 
@@ -27,8 +28,8 @@ class HideGroupsPlugin(plugins.SingletonPlugin):
                             package_type):
         return self._facets(facets_dict)
 
-    # IAuthFunctions
-
+    # IAuthFunctions Plugin
+    # Overrule group_greate with def _group_create
     def get_auth_functions(self):
         return {'group_create': _group_create}
 

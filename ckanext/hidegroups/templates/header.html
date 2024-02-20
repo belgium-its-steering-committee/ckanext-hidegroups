@@ -1,11 +1,14 @@
 {% ckan_extends %}
 
-{# This is the header_site_navigation_tabs block copy-pasted from core, but
-   with the Groups link removed #}
-{% block header_site_navigation_tabs %}
+{# This is the header_site_navigation_tabs block copy-pasted from core,
+    which calls helper build_nav_main, 
+    and is overuled by ckan.pages.plugin line22 if pages is activated.
+    Therefore excluding the necessity of the ninja-block#}
+
+{#% block header_site_navigation_tabs %}
     {{ h.build_nav_main(
-        ('search', _('Datasets')),
-        ('organizations_index', _('Organizations')),
-        ('home.about', _('About')) )
+        ('dataset.search', _('Datasets')),
+        ('organization.index', _('Organizations'))
+    )
     }}
-{% endblock %}
+{% endblock %#}
