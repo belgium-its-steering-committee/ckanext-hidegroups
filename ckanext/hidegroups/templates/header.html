@@ -3,9 +3,11 @@
 {# This is the header_site_navigation_tabs block copy-pasted from core, but
    with the Groups link removed #}
 {% block header_site_navigation_tabs %}
+    {% set org_type = h.default_group_type('organization') %}
+
     {{ h.build_nav_main(
-        ('search', _('Datasets')),
-        ('organizations_index', _('Organizations')),
-        ('home.about', _('About')) )
-    }}
+        (dataset_type ~ '.search', h.humanize_entity_type('package', dataset_type, 'main nav') or _('Datasets'), ["dataset", "resource"]),
+        (org_type ~ '.index',
+            h.humanize_entity_type('organization', org_type, 'main nav') or _('Organizations'), ['organization']),
+        ('home.about', _('About')) ) }}
 {% endblock %}
